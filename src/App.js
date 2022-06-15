@@ -8,11 +8,16 @@ function App() {
     const m = document.querySelector('#m').checked ? 'm':''
 
     const regex = new RegExp(document.querySelector('#regexInput').value, g+i+m)
+    const lblRegex = document.querySelector('#regexRes')
+    lblRegex.innerHTML = regex
+
     let input = document.querySelector('#inputArea').value
     let output = document.querySelector('#outputArea')
-    output.value = input.match(regex)
-    console.log(regex)
-    
+    const resArray = input.match(regex)
+    let resTxt = ''
+
+    if (resArray) resArray.forEach(e => resTxt+= e + '\n' )
+    output.value = resTxt    
   })
 
   return (
@@ -21,16 +26,20 @@ function App() {
       <input id='regexInput' placeholder='Insert regular expression here'></input>
       <label id='end'>/</label>
 
-      <button onClick={testClick}>Test</button>
+      <button onClick={testClick}>Go</button>
+
+      <br></br><label id='regexRes'></label>
       
-      <br></br>
-      <label>g</label>
+      <br></br><br></br>
+      <label>Global</label>
       <input id='g' type='checkbox'></input>
 
-      <label>i</label>
+      <br></br>
+      <label>Case insensitive</label>
       <input id='i' type='checkbox'></input>
 
-      <label>m</label>
+      <br></br>
+      <label>Multi line</label>
       <input id='m' type='checkbox'></input>
 
       <br></br><br></br>
