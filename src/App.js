@@ -12,12 +12,21 @@ function App() {
     lblRegex.innerHTML = regex
 
     let input = document.querySelector('#inputArea').value
+    console.log('Largo', input.length)
+
     let output = document.querySelector('#outputArea')
     const resArray = input.match(regex)
     let resTxt = ''
 
     if (resArray) resArray.forEach(e => resTxt+= e + '\n' )
     output.value = resTxt    
+  })
+
+  const clearInputText = (e=>{
+    e.preventDefault()
+    let input = document.querySelector('#inputArea')
+    input.value = ''
+
   })
 
   return (
@@ -47,8 +56,10 @@ function App() {
         <label>Input text</label>
         <br></br>
         <textarea rows="15" cols="90" id='inputArea'></textarea>
+        <button onClick={clearInputText}>Clear</button>
         <button>Paste</button>
         <br></br><br></br>
+
         <label>Output text</label>
         <br></br>
         <textarea rows="15" cols="90" id='outputArea'></textarea>
